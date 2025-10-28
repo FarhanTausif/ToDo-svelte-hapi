@@ -1,4 +1,6 @@
 import Hapi from '@hapi/hapi';
+import { todoRoutes } from './routes/todoRoutes.js';
+import { TodoModel } from './models/todoModel.js';
 
 // Initialize Hapi server
 const init = async () => {
@@ -35,6 +37,12 @@ const init = async () => {
       };
     }
   });
+
+  // Register todo routes
+  server.route(todoRoutes);
+
+  // Seed initial data
+  TodoModel.seedData();
 
   // Start the server
   await server.start();
